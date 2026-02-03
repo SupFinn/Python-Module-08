@@ -11,7 +11,6 @@ def main():
         "pandas": "Data manipulation ready",
         "requests": "Network access ready",
         "matplotlib": "Visualization ready",
-        "numpy": "Numerical computation ready"
     }
 
     for package, message in packages.items():
@@ -24,12 +23,37 @@ def main():
     missing_packages = [pkg for pkg in packages if util.find_spec(pkg) is None]
     if missing_packages:
         print("Some packages are missing:", ", ".join(missing_packages))
-        print("Please install them with pip or Poetry")
-        sys.exit(1)
+        print("For installation:\n")
+        print("--: Using pip:\n")
+        print("pip install -r requirements.txt\n")
+        print("--: Using poetry:\n")
+        print("poetry install")
+        return
 
-    import pandas as pd
+    print("\nAnalyzing Matrix data...")
+    import pandas
     import matplotlib.pyplot as plt
-    import numpy as np
+    import requests
+
+    response = requests.get("https://jsonplaceholder.typicode.com/posts")
+    if response.status_code >= 404:
+        print("HTTP error.")
+        return
+
+    request_data: list[dict] = response.json()
+    print("Processing 1000 data points...")
+    pandas_format = pandas.DataFrame(request_data)
+    print("Generating visualization...\n")
+
+    numberical_columns = pandas_format[['id', 'userId']]
+
+    numberical_columns.plot()
+    print("Analysis complete!")
+    plt.savefig('matrix_analysis.png')
+    print("Results saved to: matrix_analysis.png")
+
+
+
 
 
 

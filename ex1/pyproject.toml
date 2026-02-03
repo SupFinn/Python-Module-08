@@ -1,0 +1,22 @@
+[project]
+name = "ex1"
+version = "1.0.0"
+description = "This Project Is About {This and That}..."
+authors = [
+    {name = "Finn", email="rhssayn@student.1337.ma"}
+]
+requires-python = ">=3.10"
+dependencies = [
+    "pandas (>=2.1.0,<3.0.0)",
+    "requests (>=2.32.5,<3.0.0)",
+    "matplotlib (>=3.10.8,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry]
+package-mode = false

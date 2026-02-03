@@ -1,5 +1,5 @@
-import sys
 from importlib import util, metadata
+
 
 def main():
     print()
@@ -17,7 +17,8 @@ def main():
         if util.find_spec(package) is not None:
             print(f"[OK] {package} ({metadata.version(package)}) - {message}")
         else:
-            print(f"[MISSING] {package} - Please install it with pip or Poetry")
+            print(f"[MISSING] {package} - "
+                  "Please install it with pip or Poetry")
 
     print()
     missing_packages = [pkg for pkg in packages if util.find_spec(pkg) is None]
@@ -45,16 +46,12 @@ def main():
     pandas_format = pandas.DataFrame(request_data)
     print("Generating visualization...\n")
 
-    numberical_columns = pandas_format[['id', 'userId']]
+    numberical_columns = pandas_format[["id", "userId"]]
 
     numberical_columns.plot()
     print("Analysis complete!")
-    plt.savefig('matrix_analysis.png')
+    plt.savefig("matrix_analysis.png")
     print("Results saved to: matrix_analysis.png")
-
-
-
-
 
 
 if __name__ == "__main__":
